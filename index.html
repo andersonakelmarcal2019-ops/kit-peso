@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1013393191148453');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1013393191148453&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz — Kit Peso Pronto | Descubra Seu Kit Ideal</title>
+  <meta name="description" content="Responda 5 perguntas rápidas e descubra exatamente qual configuração de pesos é ideal para montar sua academia em casa com o Kit Peso Pronto." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0A0A0A;
+      color: #FFFFFF;
+      min-height: 100vh;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --yellow: #FFD600;
+      --yellow-dark: #C9A800;
+      --yellow-glow: rgba(255, 214, 0, 0.18);
+      --bg: #0A0A0A;
+      --card: #1A1A1A;
+      --border: #2A2A2A;
+      --text: #FFFFFF;
+      --muted: #9A9A9A;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 12px;
+      --radius-lg: 18px;
+    }
+
+    /* ===== CRITICAL CSS — ABOVE FOLD ===== */
+    #quiz-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+      animation: slideIn 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .screen.active { display: block; }
+    .screen.exit { animation: slideOut 0.3s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(-40px); }
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-container {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 20px 16px 0;
+    }
+    .progress-label {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .progress-track {
+      width: 100%;
+      height: 5px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--yellow);
+      border-radius: 99px;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px rgba(255, 214, 0, 0.5);
+    }
+
+    /* ===== SCREEN 0 — INTRO ===== */
+    .intro-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow-glow);
+      border: 1px solid rgba(255, 214, 0, 0.3);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--yellow);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      margin-top: 32px;
+    }
+    .intro-headline {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 8vw, 58px);
+      font-weight: 900;
+      line-height: 1.02;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .intro-headline span { color: var(--yellow); }
+    .intro-sub {
+      font-size: clamp(15px, 3.5vw, 17px);
+      color: #C0C0C0;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .chips-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+      justify-content: center;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #D0D0D0;
+      white-space: nowrap;
+    }
+
+    /* ===== CTA BUTTON ===== */
+    .btn-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 28px;
+      background: var(--yellow);
+      color: #0A0A0A;
+      font-family: var(--font-display);
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      animation: pulse-glow 2.5s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-cta:hover {
+      background: #FFE033;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 214, 0, 0.4);
+      animation: none;
+    }
+    .btn-cta:active { transform: scale(0.98); }
+    .btn-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0.3); }
+      50%       { box-shadow: 0 0 0 12px rgba(255, 214, 0, 0); }
+    }
+
+    /* ===== QUIZ SCREENS ===== */
+    .question-number {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      margin-top: 28px;
+      text-align: center;
+    }
+    .question-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 6vw, 40px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 520px) {
+      .options-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .option-card:hover {
+      border-color: rgba(255, 214, 0, 0.5);
+      background: #1E1E1E;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(255, 214, 0, 0.1);
+    }
+    .option-card.selected {
+      border-color: var(--yellow);
+      background: rgba(255, 214, 0, 0.07);
+      transform: scale(0.98);
+      box-shadow: 0 0 20px rgba(255, 214, 0, 0.2);
+    }
+    .option-emoji {
+      font-size: 28px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .option-text {
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    /* ===== SCREEN 6 — VIDEO ===== */
+    .video-label {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 5vw, 34px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text);
+      margin: 32px 0 20px;
+      line-height: 1.1;
+      text-align: center;
+    }
+    .video-label span { color: var(--yellow); }
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .video-placeholder:hover { border-color: rgba(255,214,0,0.4); }
+    .video-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,214,0,0.04) 0%, transparent 70%);
+    }
+    .play-btn {
+      width: 72px;
+      height: 72px;
+      background: var(--yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(255,214,0,0.4);
+      animation: pulse-glow 2.5s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .play-btn svg { margin-left: 5px; }
+    .video-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 16px;
+      text-align: center;
+    }
+    .video-embed-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+    .video-embed-wrap iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+    }
+    .video-cta-hidden {
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      margin-top: 24px;
+    }
+    .video-cta-hidden.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* ===== SCREEN 7 — RESULT ===== */
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow-glow);
+      border: 1px solid rgba(255,214,0,0.35);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      margin-top: 32px;
+    }
+    .result-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 6.5vw, 46px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .result-title span { color: var(--yellow); }
+    .result-box {
+      background: var(--card);
+      border: 1px solid rgba(255,214,0,0.25);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .result-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--yellow);
+    }
+    .result-kit-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--yellow);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .result-kit-name {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 4.5vw, 28px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .result-kit-desc {
+      font-size: 15px;
+      color: #C0C0C0;
+      line-height: 1.6;
+    }
+
+    /* ===== OFFER CARD ===== */
+    .offer-card {
+      background: var(--card);
+      border: 2px solid rgba(255,214,0,0.3);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(255,214,0,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .offer-best-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--yellow);
+      color: #0A0A0A;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      padding: 5px 12px;
+      margin-bottom: 14px;
+    }
+    .offer-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    .offer-img {
+      width: 100%;
+      max-width: 260px;
+      display: block;
+      margin: 0 auto 22px;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+    .price-old {
+      font-size: 15px;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .price-main {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 10vw, 66px);
+      font-weight: 900;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-installment {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 26px;
+      text-align: left;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #D0D0D0;
+      line-height: 1.4;
+    }
+    .checklist li::before {
+      content: '✅';
+      flex-shrink: 0;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 6vw, 40px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .section-title span { color: var(--yellow); }
+    .section-sub {
+      font-size: clamp(14px, 3.5vw, 16px);
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 40px 0;
+    }
+
+    /* ===== BONUS GRID ===== */
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    @media (min-width: 600px) {
+      .bonus-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .bonus-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .bonus-card:hover {
+      border-color: rgba(255,214,0,0.3);
+      transform: translateY(-2px);
+    }
+    .bonus-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #111;
+    }
+    .bonus-emoji-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1E1E1E, #141414);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    .bonus-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--yellow);
+      text-transform: uppercase;
+    }
+    .bonus-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .bonus-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ===== COMPARISON ===== */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 560px) {
+      .compare-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .compare-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 18px;
+    }
+    .compare-card.good { border-color: rgba(255,214,0,0.4); }
+    .compare-card.bad { border-color: #333; opacity: 0.8; }
+    .compare-header {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .compare-card.good .compare-header { color: var(--yellow); }
+    .compare-card.bad .compare-header { color: var(--muted); }
+    .compare-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      gap: 8px;
+    }
+    .compare-item:last-child { border-bottom: none; }
+    .compare-item-name { color: #C0C0C0; flex: 1; }
+    .compare-item-price { font-weight: 700; color: var(--text); white-space: nowrap; }
+    .compare-total {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 2px solid var(--border);
+    }
+    .compare-savings {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(18px, 4.5vw, 26px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--yellow);
+      background: var(--yellow-glow);
+      border: 1px solid rgba(255,214,0,0.25);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 32px;
+    }
+
+    /* ===== SOCIAL PROOF ===== */
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    @media (min-width: 600px) {
+      .photos-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+    .photos-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .photos-grid img:hover {
+      border-color: rgba(255,214,0,0.4);
+      transform: scale(1.03);
+    }
+
+    /* ===== TESTIMONIALS CAROUSEL ===== */
+    .testimonials-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto 32px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+    .testimonials-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .testimonials-track img {
+      min-width: 100%;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--border);
+      display: block;
+      object-fit: cover;
+    }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .carousel-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--yellow);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .carousel-btn:hover {
+      background: var(--yellow);
+      color: #0A0A0A;
+      border-color: var(--yellow);
+    }
+    .carousel-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot.active {
+      background: var(--yellow);
+      transform: scale(1.3);
+    }
+
+    /* ===== GUARANTEE ===== */
+    .guarantee-card {
+      background: var(--card);
+      border: 2px solid rgba(255,214,0,0.25);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .guarantee-logo {
+      width: 80px;
+      height: auto;
+    }
+    .guarantee-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .guarantee-text {
+      font-size: 15px;
+      color: #C0C0C0;
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: rgba(255,214,0,0.35); }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 600;
+      color: var(--text);
+      gap: 12px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.35s;
+      font-size: 14px;
+      color: var(--yellow);
+      font-weight: 700;
+    }
+    .faq-item.open .faq-icon {
+      background: var(--yellow);
+      color: #0A0A0A;
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      font-size: 14px;
+      color: #B0B0B0;
+      line-height: 1.7;
+      padding: 0 20px;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 20px 18px;
+    }
+
+    /* ===== FINAL CTA ===== */
+    .final-cta-section {
+      text-align: center;
+      padding: 0;
+      margin-bottom: 40px;
+    }
+    .final-cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 8vw, 54px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1.02;
+      margin-bottom: 10px;
+    }
+    .final-cta-title span { color: var(--yellow); }
+    .final-cta-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 20px 16px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--yellow); }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== LOADING DOTS ===== */
+    .loading-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 60px 16px;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .loading-screen.active { display: flex; }
+    .loading-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text);
+      text-align: center;
+    }
+    .loading-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .loading-dots span {
+      width: 10px;
+      height: 10px;
+      background: var(--yellow);
+      border-radius: 50%;
+      animation: dot-bounce 1.2s ease-in-out infinite;
+    }
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+      40%            { transform: scale(1); opacity: 1; }
+    }
+
+    /* ===== MOBILE SAFE AREAS ===== */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      body { padding-bottom: env(safe-area-inset-bottom); }
+    }
+
+    /* ===== FOCUS VISIBLE ===== */
+    :focus-visible {
+      outline: 2px solid var(--yellow);
+      outline-offset: 3px;
+    }
+
+    .result-page-wrapper {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ===== OPTION CARD TEXT LEFT-ALIGNED (only cards stay left) ===== */
+    .option-card { text-align: left; }
+    .compare-item { text-align: left; }
+    .faq-question { text-align: left; }
+    .faq-answer { text-align: left; }
+    .bonus-card { text-align: left; }
+  </style>
+</head>
+<body>
+
+<!-- PROGRESS (hidden until question 1) -->
+<div class="progress-container" id="progressContainer" style="display:none;">
+  <div class="progress-label">
+    <span id="progressText">PERGUNTA 1 DE 5</span>
+    <span id="progressPercent">20%</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width:20%"></div>
+  </div>
+</div>
+
+<div id="quiz-wrapper">
+
+  <!-- ===== SCREEN 0 — INTRO ===== -->
+  <div class="screen active" id="screen-0" role="main">
+    <div class="intro-eyebrow">🏋️ Teste rápido · 5 perguntas</div>
+    <h1 class="intro-headline">
+      DESCUBRA O KIT CERTO PARA<br>
+      MONTAR SUA<br>
+      <span>ACADEMIA EM CASA</span>
+    </h1>
+    <p class="intro-sub">Responda 5 perguntas rápidas e veja exatamente qual configuração de pesos é ideal para o seu objetivo e nível atual.</p>
+    <div class="chips-row" role="list" aria-label="Informações do quiz">
+      <div class="chip" role="listitem">⏱️ Menos de 2 minutos</div>
+      <div class="chip" role="listitem">👥 +500 pessoas já montaram</div>
+      <div class="chip" role="listitem">🎯 Resultado personalizado</div>
+    </div>
+    <button class="btn-cta" id="startBtn" onclick="startQuiz()" aria-label="Iniciar o teste agora">
+      INICIAR O TESTE AGORA →
+    </button>
+  </div>
+
+  <!-- ===== SCREEN 1 ===== -->
+  <div class="screen" id="screen-1">
+    <div class="question-number">PERGUNTA 1 DE 5</div>
+    <h2 class="question-title">QUAL É O SEU PRINCIPAL OBJETIVO COM OS TREINOS EM CASA?</h2>
+    <div class="options-grid" role="radiogroup" aria-label="Pergunta 1">
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 1, 'Ganhar massa muscular e força')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,1,'Ganhar massa muscular e força')">
+        <span class="option-emoji">💪</span>
+        <span class="option-text">Ganhar massa muscular e força</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 1, 'Emagrecer e definir o corpo')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,1,'Emagrecer e definir o corpo')">
+        <span class="option-emoji">🔥</span>
+        <span class="option-text">Emagrecer e definir o corpo</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 1, 'Melhorar saúde e condicionamento')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,1,'Melhorar saúde e condicionamento')">
+        <span class="option-emoji">❤️</span>
+        <span class="option-text">Melhorar saúde e condicionamento</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 1, 'Me manter ativo sem depender de academia')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,1,'Me manter ativo sem depender de academia')">
+        <span class="option-emoji">🏃</span>
+        <span class="option-text">Me manter ativo sem depender de academia</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 2 ===== -->
+  <div class="screen" id="screen-2">
+    <div class="question-number">PERGUNTA 2 DE 5</div>
+    <h2 class="question-title">COMO VOCÊ DESCREVERIA SEU NÍVEL ATUAL DE TREINO?</h2>
+    <div class="options-grid" role="radiogroup" aria-label="Pergunta 2">
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 2, 'Iniciante')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,2,'Iniciante')">
+        <span class="option-emoji">🌱</span>
+        <span class="option-text">Iniciante — nunca treinei ou parei há muito tempo</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 2, 'Intermediário')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,2,'Intermediário')">
+        <span class="option-emoji">📈</span>
+        <span class="option-text">Intermediário — treino há alguns meses</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 2, 'Avançado')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,2,'Avançado')">
+        <span class="option-emoji">💪</span>
+        <span class="option-text">Avançado — treino regularmente há mais de 1 ano</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 2, 'Voltando')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,2,'Voltando')">
+        <span class="option-emoji">🔄</span>
+        <span class="option-text">Voltando — já treinei antes e quero retomar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 3 ===== -->
+  <div class="screen" id="screen-3">
+    <div class="question-number">PERGUNTA 3 DE 5</div>
+    <h2 class="question-title">QUAL DESSAS SITUAÇÕES MAIS SE PARECE COM A SUA?</h2>
+    <div class="options-grid" role="radiogroup" aria-label="Pergunta 3">
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 3, 'Pago academia mas quase não consigo ir')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,3,'Pago academia mas quase não consigo ir')">
+        <span class="option-emoji">💸</span>
+        <span class="option-text">Pago academia mas quase não consigo ir</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 3, 'Quero treinar em casa mas não tenho equipamento')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,3,'Quero treinar em casa mas não tenho equipamento')">
+        <span class="option-emoji">🏠</span>
+        <span class="option-text">Quero treinar em casa mas não tenho equipamento</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 3, 'Perco muito tempo no deslocamento')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,3,'Perco muito tempo no deslocamento')">
+        <span class="option-emoji">⏰</span>
+        <span class="option-text">Perco muito tempo no deslocamento até a academia</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 3, 'Cancelei a academia')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,3,'Cancelei a academia')">
+        <span class="option-emoji">🚫</span>
+        <span class="option-text">Cancelei a academia e preciso de uma alternativa</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 4 ===== -->
+  <div class="screen" id="screen-4">
+    <div class="question-number">PERGUNTA 4 DE 5</div>
+    <h2 class="question-title">QUANTO VOCÊ ESTÁ DISPOSTO A INVESTIR NOS MATERIAIS?</h2>
+    <div class="options-grid" role="radiogroup" aria-label="Pergunta 4">
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 4, 'Até R$100')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,4,'Até R$100')">
+        <span class="option-emoji">💰</span>
+        <span class="option-text">Até R$100 — quero o básico para começar</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 4, 'R$100 a R$200')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,4,'R$100 a R$200')">
+        <span class="option-emoji">💰💰</span>
+        <span class="option-text">Entre R$100 e R$200 — quero um kit completo</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 4, 'Mais de R$200')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,4,'Mais de R$200')">
+        <span class="option-emoji">💰💰💰</span>
+        <span class="option-text">Mais de R$200 — quero montar uma estrutura completa</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 4, 'Não sei ainda')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,4,'Não sei ainda')">
+        <span class="option-emoji">🤔</span>
+        <span class="option-text">Não sei ainda — quero ver as opções</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 5 ===== -->
+  <div class="screen" id="screen-5">
+    <div class="question-number">PERGUNTA 5 DE 5</div>
+    <h2 class="question-title">QUAL É O SEU MAIOR OBSTÁCULO PARA COMEÇAR HOJE?</h2>
+    <div class="options-grid" role="radiogroup" aria-label="Pergunta 5">
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 5, 'Não sei por onde começar')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,5,'Não sei por onde começar')">
+        <span class="option-emoji">😕</span>
+        <span class="option-text">Não sei por onde começar</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 5, 'Nunca montei nada com as próprias mãos')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,5,'Nunca montei nada com as próprias mãos')">
+        <span class="option-emoji">🔨</span>
+        <span class="option-text">Nunca montei nada com as próprias mãos</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 5, 'Acho que vai dar muito trabalho')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,5,'Acho que vai dar muito trabalho')">
+        <span class="option-emoji">⏳</span>
+        <span class="option-text">Acho que vai dar muito trabalho</span>
+      </div>
+      <div class="option-card" tabindex="0" role="radio" aria-checked="false" onclick="selectOption(this, 5, 'Tenho medo de não ter resultado')" onkeydown="if(event.key==='Enter'||event.key===' ')selectOption(this,5,'Tenho medo de não ter resultado')">
+        <span class="option-emoji">💭</span>
+        <span class="option-text">Tenho medo de não ter resultado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LOADING ===== -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="loading-title">ANALISANDO SUAS RESPOSTAS...</div>
+    <div class="loading-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 6 — VIDEO ===== -->
+  <div class="screen" id="screen-6">
+    <h2 class="video-label">ANTES DE VER SEU RESULTADO,<br><span>ASSISTA ESSE VÍDEO RÁPIDO:</span></h2>
+    <div class="video-embed-wrap">
+      <iframe
+        id="panda-881d3f35-b6f5-4c9f-a00e-7a2a0dc044fa"
+        src="https://player-vz-893cea9a-d6c.tv.pandavideo.com.br/embed/?v=881d3f35-b6f5-4c9f-a00e-7a2a0dc044fa"
+        style="border:none;"
+        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
+        allowfullscreen="true"
+        width="100%"
+        height="100%"
+        fetchpriority="high"
+      ></iframe>
+    </div>
+    <div id="videoCta" class="video-cta-hidden">
+      <p class="video-sub">Assista ao vídeo e clique no botão abaixo quando estiver pronto.</p>
+      <button class="btn-cta" style="margin-top:16px;" onclick="goToScreen(7)" aria-label="Ver resultado">
+        EU QUERO MONTAR MEUS PESOS →
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 7 — RESULT ===== -->
+  <div class="screen" id="screen-7">
+    <div class="result-page-wrapper">
+
+      <!-- Result block -->
+      <div class="reveal">
+        <div class="result-badge">🎯 Seu Resultado Personalizado</div>
+        <h2 class="result-title">SEU KIT IDEAL:<br><span>CIRCUITO COMPLETO</span><br>COM HALTERES E ANILHAS</h2>
+        <div class="result-box">
+          <div class="result-kit-label">Recomendação</div>
+          <div class="result-kit-name">Kit Circuito Completo</div>
+          <p class="result-kit-desc">Para quem está retomando, comece com halteres de 4kg a 12kg. Em 4 semanas você já sente a diferença e pode aumentar as cargas progressivamente no conforto da sua casa.</p>
+        </div>
+      </div>
+
+      <!-- Offer card -->
+      <div class="offer-card reveal">
+        <div class="offer-best-badge">⚡ Mais Vendido</div>
+        <h3 class="offer-title">KIT COMPLETO<br>COM TODOS OS BÔNUS</h3>
+        <img
+          src="https://pesopronto.site/wp-content/uploads/2026/04/PDF-IMPRIMIR-E-TREINAR-5-1-819x1024.png"
+          alt="Kit Peso Pronto — Mockup do produto"
+          class="offer-img"
+          loading="eager"
+        />
+        <div class="price-old">De R$197,00</div>
+        <div class="price-main">R$19,90</div>
+        <div class="price-installment">ou 4x de R$5,70 no cartão</div>
+        <ul class="checklist">
+          <li>Você economiza R$177,10</li>
+          <li>100 moldes prontos para montar pesos em casa</li>
+          <li>Halteres (2–40kg), anilhas (5–20kg) e kettlebells (3–20kg)</li>
+          <li>Estrutura pronta para imprimir e montar</li>
+          <li>Passo a passo ilustrado para montagem</li>
+          <li>Guia de treino em casa para iniciantes</li>
+          <li>Vídeo aula da montagem do início ao fim</li>
+          <li>Lista de materiais baratos e fáceis</li>
+          <li>+ 6 bônus exclusivos incluídos</li>
+        </ul>
+        <a href="#checkout" class="btn-cta" id="mainCta" aria-label="Garantir Kit Peso Pronto agora">
+          🔓 GARANTIR MEU KIT AGORA
+        </a>
+        <div class="secure-note" aria-label="Compra segura">
+          🔒 Compra 100% segura e criptografada. Receba o acesso imediato no seu e-mail.
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Bonuses -->
+      <div class="reveal">
+        <div class="section-title">MAS NÃO É SÓ ISSO...</div>
+        <p class="section-sub">Você também leva <strong style="color:var(--yellow)">6 bônus exclusivos</strong> sem custo adicional</p>
+        <div class="bonus-grid">
+          <div class="bonus-card reveal">
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-143624.png" alt="Checklist de Montagem Rápida" class="bonus-img" loading="lazy" />
+            <div>
+              <div class="bonus-number">Bônus 1</div>
+              <div class="bonus-name">Checklist de Montagem Rápida</div>
+              <div class="bonus-desc">Passo a passo visual para montar sem erro, mesmo sendo a primeira vez.</div>
+            </div>
+          </div>
+          <div class="bonus-card reveal">
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-142646-1.png" alt="Guia de Treino em Casa" class="bonus-img" loading="lazy" />
+            <div>
+              <div class="bonus-number">Bônus 2</div>
+              <div class="bonus-name">Guia de Treino em Casa (Iniciante)</div>
+              <div class="bonus-desc">Mostra exatamente como usar os pesos que você montou.</div>
+            </div>
+          </div>
+          <div class="bonus-card reveal">
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-143115.png" alt="Lista de Materiais Baratos" class="bonus-img" loading="lazy" />
+            <div>
+              <div class="bonus-number">Bônus 3</div>
+              <div class="bonus-name">Lista de Materiais Baratos</div>
+              <div class="bonus-desc">Tudo que você precisa usando coisas simples e baratas.</div>
+            </div>
+          </div>
+          <div class="bonus-card reveal">
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-145558.png" alt="Treino Pronto de 7 Dias" class="bonus-img" loading="lazy" />
+            <div>
+              <div class="bonus-number">Bônus 4</div>
+              <div class="bonus-name">Treino Pronto de 7 Dias</div>
+              <div class="bonus-desc">Siga o plano e comece sua rotina de treinos ainda hoje.</div>
+            </div>
+          </div>
+          <div class="bonus-card reveal">
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-143536.png" alt="Aula Gravada de Montagem" class="bonus-img" loading="lazy" />
+            <div>
+              <div class="bonus-number">Bônus 5</div>
+              <div class="bonus-name">Aula Gravada de Montagem</div>
+              <div class="bonus-desc">Veja o passo a passo em vídeo para ter certeza que está fazendo certo.</div>
+            </div>
+          </div>
+          <div class="bonus-card reveal">
+            <div class="bonus-emoji-placeholder">🏷️</div>
+            <div>
+              <div class="bonus-number">Bônus 6</div>
+              <div class="bonus-name">Kit de Adesivos para Pesos</div>
+              <div class="bonus-desc">Etiquetas prontas para imprimir e colar nos seus pesos.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Comparison -->
+      <div class="reveal">
+        <div class="section-title">QUANTO VOCÊ <span>ECONOMIZA</span><br>COMPRANDO COM O KIT?</div>
+        <div class="compare-grid">
+          <div class="compare-card bad">
+            <div class="compare-header">❌ Comprando no Mercado Livre</div>
+            <div class="compare-item"><span class="compare-item-name">2 halteres 4kg</span><span class="compare-item-price">R$ 166,18</span></div>
+            <div class="compare-item"><span class="compare-item-name">2 halteres 8kg</span><span class="compare-item-price">R$ 265,80</span></div>
+            <div class="compare-item"><span class="compare-item-name">2 anilhas 10kg</span><span class="compare-item-price">R$ 379,80</span></div>
+            <div class="compare-item"><span class="compare-item-name">2 anilhas 5kg</span><span class="compare-item-price">R$ 150,06</span></div>
+            <div class="compare-total">Total: R$ 961,84 + frete</div>
+          </div>
+          <div class="compare-card good">
+            <div class="compare-header">✅ Montando com o Kit</div>
+            <div class="compare-item"><span class="compare-item-name">1 saco de cimento</span><span class="compare-item-price">R$ 35,00</span></div>
+            <div class="compare-item"><span class="compare-item-name">Areia + brita</span><span class="compare-item-price">R$ 50,00</span></div>
+            <div class="compare-item"><span class="compare-item-name">1 barra eletroduto 3m</span><span class="compare-item-price">R$ 25,00</span></div>
+            <div class="compare-item"><span class="compare-item-name">1 barra vergalhão 6m</span><span class="compare-item-price">R$ 30,00</span></div>
+            <div class="compare-item"><span class="compare-item-name">1 pacote de prego</span><span class="compare-item-price">R$ 20,00</span></div>
+            <div class="compare-item"><span class="compare-item-name">Kit Peso Pronto</span><span class="compare-item-price" style="color:var(--yellow)">R$ 19,90</span></div>
+            <div class="compare-total">Total: R$ 169,90</div>
+          </div>
+        </div>
+        <div class="compare-savings">🎯 Você economiza mais de <span style="color:var(--yellow)">R$ 790,00</span></div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Social Proof -->
+      <div class="reveal">
+        <div class="section-title">VEJA OS PESOS QUE<br><span>PESSOAS REAIS</span> JÁ MONTARAM</div>
+        <p class="section-sub">São pessoas como você, sem experiência, que decidiram montar sua academia em casa</p>
+        <div class="photos-grid">
+          <img src="https://housegymfit.com/wp-content/uploads/2025/11/Group-61.webp" alt="Pessoa montou pesos em casa 1" loading="lazy" />
+          <img src="https://housegymfit.com/wp-content/uploads/2025/11/Group-62.webp" alt="Pessoa montou pesos em casa 2" loading="lazy" />
+          <img src="https://housegymfit.com/wp-content/uploads/2025/11/Group-63.webp" alt="Pessoa montou pesos em casa 3" loading="lazy" />
+          <img src="https://housegymfit.com/wp-content/uploads/2025/11/Group-64.webp" alt="Pessoa montou pesos em casa 4" loading="lazy" />
+          <img src="https://housegymfit.com/wp-content/uploads/2025/11/Group-65.webp" alt="Pessoa montou pesos em casa 5" loading="lazy" />
+          <img src="https://housegymfit.com/wp-content/uploads/2025/11/Group-66.webp" alt="Pessoa montou pesos em casa 6" loading="lazy" />
+        </div>
+        <!-- Testimonials Carousel -->
+        <div class="testimonials-carousel" id="testimonialsCarousel">
+          <div class="testimonials-track" id="testimonialsTrack">
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-23.31.25.jpeg" alt="Depoimento WhatsApp 1" loading="lazy" />
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-23.31.26.jpeg" alt="Depoimento WhatsApp 2" loading="lazy" />
+            <img src="https://pesopronto.site/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-23.31.26-1.jpeg" alt="Depoimento WhatsApp 3" loading="lazy" />
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" onclick="carouselPrev()" aria-label="Depoimento anterior">&#8592;</button>
+          <div class="carousel-dots" id="carouselDots">
+            <div class="carousel-dot active" onclick="carouselGoTo(0)"></div>
+            <div class="carousel-dot" onclick="carouselGoTo(1)"></div>
+            <div class="carousel-dot" onclick="carouselGoTo(2)"></div>
+          </div>
+          <button class="carousel-btn" onclick="carouselNext()" aria-label="Próximo depoimento">&#8594;</button>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Guarantee -->
+      <div class="guarantee-card reveal">
+        <img src="https://obrotherstech.com.br/wp-content/uploads/2026/04/3f02fae7b7a2147a4fbc73d51b664ff4.png" alt="Garantia 30 dias" class="guarantee-logo" loading="lazy" />
+        <div class="guarantee-title">GARANTIA DE 30 DIAS</div>
+        <p class="guarantee-text">Se dentro de 30 dias você sentir que o material não ajudou, por qualquer motivo — devolvo 100% do seu dinheiro. Sem burocracia. Sem justificativas.</p>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- FAQ -->
+      <div class="reveal">
+        <div class="section-title" style="margin-bottom:24px;">PERGUNTAS FREQUENTES</div>
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleFaq(this)">
+              Preciso ter experiência para montar os pesos?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </div>
+            <div class="faq-answer">Não! O kit foi criado exatamente para quem nunca montou nada. Os moldes são impressos, os passos são ilustrados e existe uma vídeo aula completa mostrando tudo do início ao fim.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleFaq(this)">
+              O que exatamente vou receber após a compra?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </div>
+            <div class="faq-answer">Você recebe o acesso digital imediato no seu e-mail: o PDF completo com 100 moldes, mais os 6 bônus exclusivos (checklist, guia de treino, lista de materiais, plano de 7 dias, vídeo aula e kit de adesivos).</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleFaq(this)">
+              Em quanto tempo consigo começar a treinar?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </div>
+            <div class="faq-answer">Assim que você compra os materiais e segue os moldes, é possível montar os primeiros pesos em poucas horas. Muitas pessoas já treinaram no mesmo fim de semana da compra.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleFaq(this)">
+              Funciona em qualquer celular ou computador?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </div>
+            <div class="faq-answer">Sim! O material é entregue em PDF, que abre em qualquer dispositivo — celular, tablet, computador. Você também pode imprimir os moldes facilmente.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleFaq(this)">
+              Quanto tempo leva para montar os pesos?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </div>
+            <div class="faq-answer">Com os moldes prontos, montar um par de halteres leva entre 2 a 4 horas. O tempo de cura do cimento é de 24h antes de começar a usar.</div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleFaq(this)">
+              Os pesos duram quanto tempo?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </div>
+            <div class="faq-answer">Os pesos montados com concreto têm durabilidade altíssima — muitos clientes usam os mesmos pesos há mais de 1 ano sem nenhum problema. São mais resistentes do que muitos produtos de academia.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Final CTA -->
+      <div class="final-cta-section reveal">
+        <div class="final-cta-title">NÃO ADIE MAIS.<br><span>COMECE HOJE.</span></div>
+        <p class="final-cta-sub">Seu kit digital de moldes de pesos está a um clique de distância.</p>
+        <a href="#checkout" class="btn-cta" aria-label="Quero meu kit agora">🔓 QUERO MEU KIT AGORA</a>
+      </div>
+
+    </div><!-- end result-page-wrapper -->
+  </div><!-- end screen-7 -->
+
+</div><!-- end quiz-wrapper -->
+
+<footer>
+  <p>© 2026 Kit Peso Pronto — Todos os direitos reservados</p>
+  <p><a href="#">Política de Privacidade</a> &nbsp;|&nbsp; <a href="#">Termos de Uso</a> &nbsp;|&nbsp; <a href="#">Suporte</a></p>
+</footer>
+
+<script>
+  // ===== STATE =====
+  var currentStep = 0;
+  var answers = { q1: '', q2: '', q3: '', q4: '', q5: '' };
+  var isTransitioning = false;
+
+  // ===== PROGRESS BAR =====
+  function updateProgress(step) {
+    var container = document.getElementById('progressContainer');
+    var fill = document.getElementById('progressFill');
+    var text = document.getElementById('progressText');
+    var percent = document.getElementById('progressPercent');
+
+    if (step >= 1 && step <= 5) {
+      container.style.display = 'block';
+      var pct = step * 20;
+      fill.style.width = pct + '%';
+      text.textContent = 'PERGUNTA ' + step + ' DE 5';
+      percent.textContent = pct + '%';
+    } else {
+      container.style.display = 'none';
+    }
+  }
+
+  // ===== GO TO SCREEN =====
+  function goToScreen(nextStep) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    // Stop video audio if leaving screen 6
+    if (currentStep === 6) {
+      var iframe = document.getElementById('panda-881d3f35-b6f5-4c9f-a00e-7a2a0dc044fa');
+      if (iframe) {
+        iframe.src = '';
+      }
+    }
+
+    var current = document.getElementById('screen-' + currentStep);
+    var loading = document.getElementById('loading-screen');
+
+    // Hide loading if visible
+    loading.classList.remove('active');
+
+    if (current) {
+      current.classList.add('exit');
+      setTimeout(function() {
+        current.classList.remove('active', 'exit');
+        showScreen(nextStep);
+        isTransitioning = false;
+      }, 300);
+    } else {
+      showScreen(nextStep);
+      isTransitioning = false;
+    }
+  }
+
+  function showScreen(step) {
+    currentStep = step;
+    var target = document.getElementById('screen-' + step);
+    if (target) {
+      target.classList.add('active');
+      updateProgress(step);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (step === 6) {
+        var cta = document.getElementById('videoCta');
+        if (cta) {
+          cta.classList.remove('visible');
+          setTimeout(function() {
+            // Ensure we are still on the video screen when showing the CTA
+            if (currentStep === 6) {
+              cta.classList.add('visible');
+            }
+          }, 10000);
+        }
+      }
+      if (step === 7) {
+        setTimeout(initReveal, 200);
+      }
+    }
+  }
+
+  // ===== START QUIZ =====
+  function startQuiz() {
+    goToScreen(1);
+  }
+
+  // ===== SELECT OPTION =====
+  function selectOption(el, questionNum, value) {
+    if (isTransitioning) return;
+
+    // Store answer
+    answers['q' + questionNum] = value;
+
+    // Visual feedback
+    var grid = el.parentElement;
+    var cards = grid.querySelectorAll('.option-card');
+    cards.forEach(function(c) {
+      c.classList.remove('selected');
+      c.setAttribute('aria-checked', 'false');
+    });
+    el.classList.add('selected');
+    el.setAttribute('aria-checked', 'true');
+
+    // Advance
+    setTimeout(function() {
+      if (questionNum < 5) {
+        goToScreen(questionNum + 1);
+      } else {
+        // After Q5 → loading → screen 6
+        showLoading();
+      }
+    }, 400);
+  }
+
+  // ===== LOADING TRANSITION =====
+  function showLoading() {
+    var current = document.getElementById('screen-5');
+    var loading = document.getElementById('loading-screen');
+
+    if (current) {
+      current.classList.add('exit');
+      setTimeout(function() {
+        current.classList.remove('active', 'exit');
+        loading.classList.add('active');
+        document.getElementById('progressContainer').style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // After 2 seconds → go to screen 6
+        setTimeout(function() {
+          loading.classList.remove('active');
+          showScreen(6);
+        }, 2000);
+      }, 300);
+    }
+  }
+
+  // ===== FAQ TOGGLE =====
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(function(i) {
+      i.classList.remove('open');
+      i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+
+    // Open clicked
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // ===== SCROLL REVEAL =====
+  function initReveal() {
+    var elements = document.querySelectorAll('#screen-7 .reveal');
+    if (!elements.length) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    elements.forEach(function(el) {
+      observer.observe(el);
+    });
+
+    // Force first few visible immediately
+    setTimeout(function() {
+      var first = document.querySelectorAll('#screen-7 .reveal');
+      for (var i = 0; i < Math.min(2, first.length); i++) {
+        first[i].classList.add('visible');
+      }
+    }, 100);
+  }
+
+  // ===== TESTIMONIALS CAROUSEL =====
+  var carouselIndex = 0;
+  var carouselTotal = 3;
+  var carouselTimer = null;
+
+  function carouselGoTo(index) {
+    carouselIndex = (index + carouselTotal) % carouselTotal;
+    var track = document.getElementById('testimonialsTrack');
+    if (track) track.style.transform = 'translateX(-' + (carouselIndex * 100) + '%)';
+    var dots = document.querySelectorAll('.carousel-dot');
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === carouselIndex);
+    });
+  }
+
+  function carouselNext() {
+    carouselGoTo(carouselIndex + 1);
+    resetCarouselTimer();
+  }
+
+  function carouselPrev() {
+    carouselGoTo(carouselIndex - 1);
+    resetCarouselTimer();
+  }
+
+  function resetCarouselTimer() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(function() { carouselGoTo(carouselIndex + 1); }, 4000);
+  }
+
+  // Start auto-advance when result page shows
+  document.addEventListener('DOMContentLoaded', function() {
+    carouselTimer = setInterval(function() { carouselGoTo(carouselIndex + 1); }, 4000);
+  });
+</script>
+
+</body>
+</html>
