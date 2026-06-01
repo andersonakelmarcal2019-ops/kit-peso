@@ -372,6 +372,26 @@
       pointer-events: auto;
     }
 
+    .promo-banner {
+      background: linear-gradient(90deg, #D32F2F, #E50914);
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-size: clamp(12px, 3.5vw, 14px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-align: center;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(211, 47, 47, 0.4);
+      text-transform: uppercase;
+      animation: pulseGlow 2s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      from { box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4); }
+      to { box-shadow: 0 4px 25px rgba(211, 47, 47, 0.7); }
+    }
+
     /* ===== SCREEN 7 — RESULT ===== */
     .result-badge {
       display: inline-flex;
@@ -1176,6 +1196,11 @@
   <div class="screen" id="screen-7">
     <div class="result-page-wrapper">
 
+      <!-- Promo banner -->
+      <div class="promo-banner">
+        🔥 DESCONTO ESPECIAL APENAS HOJE - EXPIRA <span id="promo-date"></span>
+      </div>
+
       <!-- Result block -->
       <div class="reveal">
         <div class="result-badge">🎯 Seu Resultado Personalizado</div>
@@ -1206,10 +1231,9 @@
           <li>Halteres (2–40kg), anilhas (5–20kg) e kettlebells (3–20kg)</li>
           <li>Estrutura pronta para imprimir e montar</li>
           <li>Passo a passo ilustrado para montagem</li>
-          <li>Guia de treino em casa para iniciantes</li>
           <li>Vídeo aula da montagem do início ao fim</li>
           <li>Lista de materiais baratos e fáceis</li>
-          <li>+ 6 bônus exclusivos incluídos</li>
+          <li>+ 3 bônus exclusivos incluídos</li>
         </ul>
         <a href="https://pay.lowify.com.br/checkout.php?product_id=2VU2EE" class="btn-cta" id="mainCta" aria-label="Garantir Kit Peso Pronto agora">
           🔓 GARANTIR MEU KIT AGORA
@@ -1224,7 +1248,7 @@
       <!-- Bonuses -->
       <div class="reveal">
         <div class="section-title">MAS NÃO É SÓ ISSO...</div>
-        <p class="section-sub">Você também leva <strong style="color:var(--yellow)">6 bônus exclusivos</strong> sem custo adicional</p>
+        <p class="section-sub">Você também leva <strong style="color:var(--yellow)">3 bônus exclusivos</strong> sem custo adicional</p>
         <div class="bonus-grid">
           <div class="bonus-card reveal">
             <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-143624.png" alt="Checklist de Montagem Rápida" class="bonus-img" loading="lazy" />
@@ -1235,43 +1259,19 @@
             </div>
           </div>
           <div class="bonus-card reveal">
-            <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-142646-1.png" alt="Guia de Treino em Casa" class="bonus-img" loading="lazy" />
-            <div>
-              <div class="bonus-number">Bônus 2</div>
-              <div class="bonus-name">Guia de Treino em Casa (Iniciante)</div>
-              <div class="bonus-desc">Mostra exatamente como usar os pesos que você montou.</div>
-            </div>
-          </div>
-          <div class="bonus-card reveal">
             <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-143115.png" alt="Lista de Materiais Baratos" class="bonus-img" loading="lazy" />
             <div>
-              <div class="bonus-number">Bônus 3</div>
+              <div class="bonus-number">Bônus 2</div>
               <div class="bonus-name">Lista de Materiais Baratos</div>
               <div class="bonus-desc">Tudo que você precisa usando coisas simples e baratas.</div>
             </div>
           </div>
           <div class="bonus-card reveal">
-            <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-145558.png" alt="Treino Pronto de 7 Dias" class="bonus-img" loading="lazy" />
-            <div>
-              <div class="bonus-number">Bônus 4</div>
-              <div class="bonus-name">Treino Pronto de 7 Dias</div>
-              <div class="bonus-desc">Siga o plano e comece sua rotina de treinos ainda hoje.</div>
-            </div>
-          </div>
-          <div class="bonus-card reveal">
             <img src="https://pesopronto.site/wp-content/uploads/2026/04/Captura-de-tela-2026-04-15-143536.png" alt="Aula Gravada de Montagem" class="bonus-img" loading="lazy" />
             <div>
-              <div class="bonus-number">Bônus 5</div>
+              <div class="bonus-number">Bônus 3</div>
               <div class="bonus-name">Aula Gravada de Montagem</div>
               <div class="bonus-desc">Veja o passo a passo em vídeo para ter certeza que está fazendo certo.</div>
-            </div>
-          </div>
-          <div class="bonus-card reveal">
-            <div class="bonus-emoji-placeholder">🏷️</div>
-            <div>
-              <div class="bonus-number">Bônus 6</div>
-              <div class="bonus-name">Kit de Adesivos para Pesos</div>
-              <div class="bonus-desc">Etiquetas prontas para imprimir e colar nos seus pesos.</div>
             </div>
           </div>
         </div>
@@ -1342,9 +1342,9 @@
 
       <!-- Guarantee -->
       <div class="guarantee-card reveal">
-        <img src="https://revistaeducar.life/wp-content/uploads/2020/09/garantia-7-dias.png" alt="Garantia 7 dias" class="guarantee-logo" loading="lazy" />
-        <div class="guarantee-title">GARANTIA DE 7 DIAS</div>
-        <p class="guarantee-text">Se dentro de 7 dias você sentir que o material não ajudou por qualquer motivo, devolvo 100% do seu dinheiro. Sem burocracia. Sem justificativas.</p>
+        <img src="https://i.imgur.com/7tgkyXq.png" alt="Garantia 30 dias" class="guarantee-logo" loading="lazy" />
+        <div class="guarantee-title">GARANTIA DE 30 DIAS</div>
+        <p class="guarantee-text">Se dentro de 30 dias você sentir que o material não ajudou por qualquer motivo, devolvo 100% do seu dinheiro. Sem burocracia. Sem justificativas.</p>
       </div>
 
       <div class="section-divider"></div>
@@ -1367,7 +1367,7 @@
               O que exatamente vou receber após a compra?
               <span class="faq-icon" aria-hidden="true">+</span>
             </div>
-            <div class="faq-answer">Você recebe o acesso digital imediato no seu e-mail: o PDF completo com 100 moldes, mais os 6 bônus exclusivos (checklist, guia de treino, lista de materiais, plano de 7 dias, vídeo aula e kit de adesivos).</div>
+            <div class="faq-answer">Você recebe o acesso digital imediato no seu e-mail: o PDF completo com 100 moldes, mais os 3 bônus exclusivos (checklist de montagem rápida, lista de materiais baratos e vídeo aula da montagem).</div>
           </div>
 
           <div class="faq-item" role="listitem">
@@ -1632,9 +1632,20 @@
     carouselTimer = setInterval(function() { carouselGoTo(carouselIndex + 1); }, 4000);
   }
 
-  // Start auto-advance when result page shows
+  // Start auto-advance when result page shows and update promo date
   document.addEventListener('DOMContentLoaded', function() {
     carouselTimer = setInterval(function() { carouselGoTo(carouselIndex + 1); }, 4000);
+
+    // Set dynamic date in promo banner (DD/MM/YYYY)
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = today.getFullYear();
+    var formattedDate = dd + '/' + mm + '/' + yyyy;
+    var promoDateSpan = document.getElementById('promo-date');
+    if (promoDateSpan) {
+      promoDateSpan.textContent = formattedDate;
+    }
   });
 </script>
 
