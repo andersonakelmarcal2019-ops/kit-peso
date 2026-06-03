@@ -1005,6 +1005,92 @@
     .faq-question { text-align: left; }
     .faq-answer { text-align: left; }
     .bonus-card { text-align: left; }
+
+    /* ===== PURCHASE NOTIFICATION ===== */
+    .purchase-notification {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(26, 26, 26, 0.95);
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      transform: translateX(-120%);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+      max-width: 270px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .purchase-notification.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .purchase-notification-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--yellow-glow);
+      border: 1px solid var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--yellow);
+      flex-shrink: 0;
+    }
+
+    .purchase-notification-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .purchase-notification-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .purchase-notification-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--text);
+      font-size: 12.5px;
+      line-height: 1.2;
+    }
+
+    .purchase-notification-text {
+      font-family: var(--font-body);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .purchase-notification-badge {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #00FF66;
+      font-size: 8.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 1px;
+      font-family: var(--font-body);
+    }
+
+    @media (max-width: 576px) {
+      .purchase-notification {
+        left: 12px;
+        bottom: 12px;
+        max-width: 240px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1204,10 +1290,10 @@
       <!-- Result block -->
       <div class="reveal">
         <div class="result-badge">🎯 Seu Resultado Personalizado</div>
-        <h2 class="result-title">SEU KIT IDEAL:<br><span>CIRCUITO COMPLETO</span><br>COM HALTERES E ANILHAS</h2>
+        <h2 class="result-title">SEU KIT IDEAL:<br><span>KIT COMPLETO</span><br>COM HALTERES E ANILHAS</h2>
         <div class="result-box">
           <div class="result-kit-label">Recomendação</div>
-          <div class="result-kit-name">Kit Circuito Completo</div>
+          <div class="result-kit-name">Kit Completo</div>
           <p class="result-kit-desc">Para quem está retomando, comece com halteres de 4kg a 12kg. Em 4 semanas você já sente a diferença e pode aumentar as cargas progressivamente no conforto da sua casa.</p>
         </div>
       </div>
@@ -1235,7 +1321,7 @@
           <li>Lista de materiais baratos e fáceis</li>
           <li>+ 3 bônus exclusivos incluídos</li>
         </ul>
-        <a href="https://pay.lowify.com.br/checkout?product_id=2VU2EE" class="btn-cta" id="mainCta" aria-label="Garantir Kit Peso Pronto agora">
+        <a href="https://pay.lowify.com.br/checkout.php?product_id=2VU2EE" class="btn-cta" id="mainCta" aria-label="Garantir Kit Peso Pronto agora">
           🔓 GARANTIR MEU KIT AGORA
         </a>
         <div class="secure-note" aria-label="Compra segura">
@@ -1409,14 +1495,35 @@
       <div class="final-cta-section reveal">
         <div class="final-cta-title">NÃO ADIE MAIS.<br><span>COMECE HOJE.</span></div>
         <p class="final-cta-sub">Seu kit digital de moldes de pesos está a um clique de distância.</p>
-        <a href="https://pay.lowify.com.br/checkout?product_id=2VU2EE" class="btn-cta" aria-label="Quero meu kit agora">🔓 QUERO MEU KIT AGORA</a>
+        <a href="https://pay.lowify.com.br/checkout.php?product_id=2VU2EE" class="btn-cta" aria-label="Quero meu kit agora">🔓 QUERO MEU KIT AGORA</a>
       </div>
  
     </div><!-- end result-page-wrapper -->
   </div><!-- end screen-7 -->
  
 </div><!-- end quiz-wrapper -->
- 
+
+<!-- Purchase Notification -->
+<div id="purchase-notification" class="purchase-notification" aria-live="polite">
+  <div class="purchase-notification-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+  </div>
+  <div class="purchase-notification-content">
+    <div class="purchase-notification-title" id="notification-name">Maria Silva</div>
+    <div class="purchase-notification-text" id="notification-message">acabou de comprar o Academia em Casa!</div>
+    <div class="purchase-notification-badge">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align: middle;">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      Compra Verificada
+    </div>
+  </div>
+</div>
+
 <footer>
   <p>© 2026 Kit Peso Pronto. Todos os direitos reservados.</p>
   <p><a href="#">Política de Privacidade</a> &nbsp;|&nbsp; <a href="#">Termos de Uso</a> &nbsp;|&nbsp; <a href="#">Suporte</a></p>
@@ -1499,6 +1606,7 @@
       }
       if (step === 7) {
         setTimeout(initReveal, 200);
+        startPurchaseNotifications();
       }
     }
   }
@@ -1647,6 +1755,61 @@
       promoDateSpan.textContent = formattedDate;
     }
   });
+
+  // ===== PURCHASE NOTIFICATIONS =====
+  var notificationNames = [
+    "Mariana Santos", "Lucas Oliveira", "Ana Costa", "Gabriel Silva", "Juliana Lima",
+    "Felipe Rocha", "Beatriz Ramos", "Carlos Souza", "Fernanda Alves", "Thiago Pereira",
+    "Amanda Ribeiro", "Rodrigo Carvalho", "Camila Martins", "Matheus Fernandes", "Patrícia Gomes",
+    "Gustavo Melo", "Larissa Barbosa", "Bruno Castro", "Renata Barros", "Diego Teixeira",
+    "Rafael Silva", "Patricia Souza", "Vanessa Costa", "Danilo Santos", "Aline Pereira"
+  ];
+  
+  var notificationMessages = [
+    "acabou de comprar o Academia em Casa! 🔥",
+    "garantiu o Kit Completo com desconto! ⚡",
+    "acabou de adquirir o Kit Completo! 🚀",
+    "garantiu o acesso ao Kit Completo! 📦",
+    "garantiu o Kit Completo com todos os bônus! 🎁"
+  ];
+
+  var notificationInterval = null;
+  var notificationTimeout = null;
+
+  function showPurchaseNotification() {
+    var notifElement = document.getElementById('purchase-notification');
+    if (!notifElement) return;
+
+    // Pick random name and message
+    var name = notificationNames[Math.floor(Math.random() * notificationNames.length)];
+    var msg = notificationMessages[Math.floor(Math.random() * notificationMessages.length)];
+
+    document.getElementById('notification-name').textContent = name;
+    document.getElementById('notification-message').textContent = msg;
+
+    // Show notification
+    notifElement.classList.add('show');
+
+    // Hide after 4.5 seconds
+    setTimeout(function() {
+      notifElement.classList.remove('show');
+    }, 4500);
+  }
+
+  function startPurchaseNotifications() {
+    // Avoid double initialization
+    if (notificationInterval || notificationTimeout) return;
+
+    // First notification after 5 seconds
+    notificationTimeout = setTimeout(function() {
+      showPurchaseNotification();
+
+      // Subsequent notifications every 10 seconds
+      notificationInterval = setInterval(function() {
+        showPurchaseNotification();
+      }, 10000);
+    }, 5000);
+  }
 </script>
 
 </body>
